@@ -18,6 +18,7 @@ students = {
     "Oleksandr_Tymchuk": ["вул. Дніпровська 22", 3, [2,2,2,2,2]]
 }
 
+#=============================================DATASET TRANSFORM==========================================
 
 df = pd.DataFrame.from_dict(students,orient="index",columns=["adress","course","grades"]) # перевод словника у датасет
 df = df.reset_index().rename(columns={"index": "name"}) # додавання колонки "name"
@@ -30,10 +31,23 @@ print("=" *50)
 print(df.shape)
 print("=" *50)
 print(df.describe())
-print("=" *50)
+
+#=====================================STUDENTS SORTING=============================================================
 
 df["average_grade"] = df["grades"].apply(lambda g: round(sum(g) / len(g))) # розраховуємо середній грейд студентів
 
-
-good_students = df[df["average_grade"] > 7]
+#======================================GOOD STUDENTS===================================
+print("="*100, "GOOD STUDENTS","="*100)
+good_students = df[df["average_grade"] > 7] # визначаємо студентів які добре навчаються 
 print(good_students)
+
+
+#======================================SORTED BY NAME STUDENTS===================================
+print("="*100, "SORTED BY NAME STUDENTS","="*100)
+sorted_students = good_students.sort_values(by="name") # сортуємо студентів за ім'ям
+print(sorted_students)
+
+#======================================MIDDLESCHOOLERS===================================
+print("="*100, "MIDDLESCHOOLERS","="*100)
+middleschool_student = sorted_students[sorted_students["course"] < 10] # визначаємо учня середніх класів серед відсортованих
+print(middleschool_student) 
