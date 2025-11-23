@@ -1,1 +1,1 @@
-# DataAnalysis_Lab
+# DataAnalysis_Lab ППМР1-105 Варіант 6
