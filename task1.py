@@ -4,18 +4,18 @@ students = {
     "Vitaly_Prikhodko": ["вул. Шевченка 1", 11, [10,12,2,5]],
     "Dmytro_Kropyvnytskyi": ["вул. Лесі Українки 3", 8, [10,2,5,7,8,11]],
     "Mikhail_Romanenko": ["вул. Франка 7", 7, [11,2,5,7,8,9]],
-    "Maxim_Derizemlya": ["вул. Грушевського 2", 6, [9,2,3,5,]],
-    "Victoria_Zhuk": ["вул. Центральна 4", 9, [10,11,12,12,12,12,12]],
+    "Maxim_Derizemlya": ["вул. Грушевського 2", 6, [9,2,3,5]],
+    "Victoria_Zhuk": ["вул. Центральна 4", 6, [10,11,12,12,12,12,12]],
     "Andrey_Kuryanov": ["вул. Садова 9", 5, [10,10,10,10]],
     "Oksana_Dubovets": ["вул. Вишнева 6", 7, [11,11,12,2,5,12]],
     "Nikita_Stroganov": ["вул. Миру 8", 6, [5,5,6,7,8,12]],
     "Karina_Nikolaenko": ["вул. Квіткова 10", 2, [2,2,2,2,2]],
-    "Eugenia_Dron": ["вул. Коцюбинського 5", 10, [4,5,7,8,12]],
+    "Eugenia_Dron": ["вул. Коцюбинського 5", 6, [4,5,7,8,12]],
     "Artem_Polishchuk": ["вул. Березова 11", 8, [6,7,8,12,12]],
     "Iryna_Savchenko": ["вул. Молодіжна 14", 9, [5,7,8,4,3,2,6]],
     "Bohdan_Kryvonos": ["вул. Паркова 3", 11, [12,12,12,12,12]],
     "Sofia_Melnyk": ["вул. Сонячна 12", 9, [12,12,12,2,2,2,12]],
-    "Oleksandr_Tymchuk": ["вул. Дніпровська 22", 3, [2,2,2,2,2]]
+    "Oleksandr_Tymchuk": ["вул. Дніпровська 22", 6, [2,2,2,2,2]]
 }
 
 #=============================================DATASET TRANSFORM==========================================
@@ -49,5 +49,18 @@ print(sorted_students)
 
 #======================================MIDDLESCHOOLERS===================================
 print("="*100, "MIDDLESCHOOLERS","="*100)
-middleschool_student = sorted_students[sorted_students["course"] < 10] # визначаємо учня середніх класів серед відсортованих
+middleschool_student = sorted_students[(sorted_students["course"] < 10) & (sorted_students["course"] > 4)]   # визначаємо учнів середніх класів серед відсортованих
 print(middleschool_student) 
+
+
+#======================================AVERAGE GRADE BY COURSE===================================
+print("="*50, "AVERAGE GRADE BY COURSE (ALL STUDENTS)", "="*50)
+group_mean = df.groupby("course")["average_grade"].mean() # групування студентів за курсом та середнім балом серед усіх студентів  (серед мідлскулерів нажаль результати роботи не так добре помітні)
+print(group_mean)
+
+
+#======================================MAX AVERAGE GRADE BY COURSE===================================
+print("="*50, "MAX AVERAGE GRADE BY COURSE (ALL STUDENTS)", "="*50)
+max_value = df.groupby("course")["average_grade"].max() # знаходження максимального середнього балу серед усіх студентів  (серед мідлскулерів нажаль результати роботи не так добре помітні)
+print(max_value)
+
